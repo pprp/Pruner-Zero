@@ -75,7 +75,6 @@ CUDA_VISIBLE_DEVICES=0,1 python lib/gradient_computation.py --nsamples 128 \
     --model $PATH_TO_LLAMA2 --llama_version 2 --task gradient
 ```
 
-
 Below is an example command for pruning LLaMA-7B with Pruner-Zero, to achieve unstructured 50% sparsity.
 
 ```sh
@@ -115,6 +114,32 @@ python main.py \
     --sparsity_ratio 0.5 \
     --sparsity_type unstructured \
     --save out/llama2_7b/unstructured/pruner-zero/
+```
+
+### Searched Symbolic Pruning Metric 
+
+```json
+{
+    "data": "mul",
+    "left": {
+        "data": "abs",
+        "left": {
+            "data": "mul",
+            "left": {
+                "data": "W"
+            },
+            "right": {
+                "data": "W"
+            }
+        }
+    },
+    "right": {
+        "data": "mms",
+        "left": {
+            "data": "G"
+        }
+    }
+}
 ```
 
 ### Zero-Shot Evaluation

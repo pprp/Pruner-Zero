@@ -1,0 +1,21 @@
+{
+    "data": "mul",
+    "left": {
+        "data": "abs",
+        "left": {
+            "data": "mul",
+            "left": {
+                "data": "W"
+            },
+            "right": {
+                "data": "W"
+            }
+        }
+    },
+    "right": {
+        "data": "mms",
+        "left": {
+            "data": "G"
+        }
+    }
+}
