@@ -8,6 +8,9 @@
   <a href="https://icml.cc/Conferences/2024">
     <img src="https://img.shields.io/badge/Conference-ICML-FFB000.svg?style=flat-square" alt="LLaMA">
   </a>
+  <a>
+    <img src="https://img.shields.io/badge/License-MIT-FFB000.svg?style=flat-square" alt="LLaMA">
+  </a>
   <a href="https://github.com/facebookresearch/llama">
     <img src="https://img.shields.io/badge/LLMs-LLaMA-FFB000.svg?style=flat-square" alt="LLaMA">
   </a>
@@ -44,7 +47,6 @@ Code is still being worked on, please wait patiently...
 class="center">
 </p>
 
-Compared to magnitude pruning which removes weights solely based on their magnitudes, our pruning approach **Wanda** removes weights on a *per-output* basis, by the product of weight magnitudes and input activation norms.
 
 ## Introduction 
 
@@ -55,35 +57,52 @@ Despite the remarkable capabilities, Large Language Models (LLMs) face deploymen
 
 Installation instructions can be found in [INSTALL.md](INSTALL.md).
 
-## Usage
-The [scripts](scripts) directory contains all the bash commands to replicate the main results (Table 2) in our paper.
+## Usage 
 
-Below is an example command for pruning LLaMA-7B with Wanda, to achieve unstructured 50% sparsity.
+Our method require computation of gradient magnitude for calculation of pruning metric, following [GBLM-Pruner](https://github.com/VILA-Lab/GBLM-Pruner/blob/main/gradient_computation.py). For more scripts, see [grad_computation.sh](scripts/grad_computation.sh)
+
+```bash 
+# Demo for OPT 
+CUDA_VISIBLE_DEVICES=0 python lib/gradient_computation.py --nsamples 128 \
+    --model /path/to/facebook/opt-125m --llama_version 2 --task gradient
+
+# Demo for LLama-1
+CUDA_VISIBLE_DEVICES=0,1 python lib/gradient_computation.py --nsamples 1 \
+    --model $PATH_TO_LLAMA1 --llama_version 1 --task gradient 
+
+# Demo for LLama-2 
+CUDA_VISIBLE_DEVICES=0,1 python lib/gradient_computation.py --nsamples 128 \
+    --model $PATH_TO_LLAMA2 --llama_version 2 --task gradient
+```
+
+
+Below is an example command for pruning LLaMA-7B with Pruner-Zero, to achieve unstructured 50% sparsity.
+
 ```sh
 python main.py \
     --model decapoda-research/llama-7b-hf \
-    --prune_method wanda \
+    --prune_method pruner-zero \
     --sparsity_ratio 0.5 \
     --sparsity_type unstructured \
-    --save out/llama_7b/unstructured/wanda/ 
+    --save out/llama_7b/unstructured/pruner-zero/ 
 ```
 We provide a quick overview of the arguments:  
 - `--model`: The identifier for the LLaMA model on the Hugging Face model hub.
 - `--cache_dir`: Directory for loading or storing LLM weights. The default is `llm_weights`.
-- `--prune_method`: We have implemented three pruning methods, namely [`magnitude`, `wanda`, `sparsegpt`].
+- `--prune_method`: We have implemented three pruning methods, namely [`magnitude`, `wanda`, `sparsegpt`, `pruner-zero`].
 - `--sparsity_ratio`: Denotes the percentage of weights to be pruned.
 - `--sparsity_type`: Specifies the type of sparsity [`unstructured`, `2:4`, `4:8`].
-- `--use_variant`: Whether to use the Wanda variant, default is `False`. 
 - `--save`: Specifies the directory where the result will be stored.
 
 For structured N:M sparsity, set the argument `--sparsity_type` to "2:4" or "4:8". An illustrative command is provided below:
+
 ```sh
 python main.py \
     --model decapoda-research/llama-7b-hf \
-    --prune_method wanda \
+    --prune_method pruner-zero \
     --sparsity_ratio 0.5 \
     --sparsity_type 2:4 \
-    --save out/llama_7b/2-4/wanda/ 
+    --save out/llama_7b/2-4/pruner-zero/ 
 ```
 
 ### Pruning LLaMA-2
@@ -92,13 +111,14 @@ For [LLaMA-2](https://ai.meta.com/llama/) models, replace `--model` with `meta-l
 ```sh 
 python main.py \
     --model meta-llama/Llama-2-7b-hf \
-    --prune_method wanda \
+    --prune_method pruner-zero \
     --sparsity_ratio 0.5 \
     --sparsity_type unstructured \
-    --save out/llama2_7b/unstructured/wanda/
+    --save out/llama2_7b/unstructured/pruner-zero/
 ```
 
 ### Zero-Shot Evaluation
+
 For evaluating zero-shot tasks, we modify the [EleutherAI LM Harness](https://github.com/EleutherAI/lm-evaluation-harness/tree/master) framework so that it could evaluate pruned LLM models. We provide the modified repo in [this link](https://drive.google.com/file/d/1zugbLyGZKsH1L19L9biHLfaGGFnEc7XL/view?usp=sharing). Make sure to download, extract and install this custom `lm_eval` package from the source code.
 
 For reproducibility, we used [commit `df3da98`](https://github.com/EleutherAI/lm-evaluation-harness/tree/df3da98c5405deafd519c2ddca52bb7c3fe36bef) on the main branch. All tasks were evaluated on task version of 0 except for BoolQ, where the task version is 1.

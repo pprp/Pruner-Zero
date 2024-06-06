@@ -14,3 +14,7 @@ pip install transformers==4.28.0 datasets==2.11.0 wandb sentencepiece
 pip install accelerate==0.18.0
 ```
 There are known [issues](https://github.com/huggingface/transformers/issues/22222) with the transformers library on loading the LLaMA tokenizer correctly. Please follow the mentioned suggestions to resolve this issue.
+
+Our cuda version is 12.0 
+
+For more environment setups, please refer to [requirements](requirements.txt)
