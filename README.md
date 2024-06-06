@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/pprp/Pruner-Zero/main/.github/images/logo-of-pruner-zero.tiff" width="20%"> <br>
+<img src="https://raw.githubusercontent.com/pprp/Pruner-Zero/main/.github/images/logo-of-pruner-zero.png" width="20%"> <br>
 </p>
 
 <div align="center">
@@ -11,6 +11,7 @@
   <a href="https://github.com/facebookresearch/llama">
     <img src="https://img.shields.io/badge/LLMs-Llama2-FAB093.svg?style=flat-square" alt="Llama-2">
   </a>
+  </div>
 </div>
 
 Official PyTorch implementation of Pruner-Zero, accepted by ICML2024
