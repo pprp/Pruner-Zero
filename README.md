@@ -5,6 +5,9 @@
 <div align="center">
 <h1>Pruner-Zero</h1>
   <div align="center">
+  <a href="https://icml.cc/Conferences/2024">
+    <img src="https://img.shields.io/badge/Conference-ICML-FFB000.svg?style=flat-square" alt="LLaMA">
+  </a>
   <a href="https://github.com/facebookresearch/llama">
     <img src="https://img.shields.io/badge/LLMs-LLaMA-FFB000.svg?style=flat-square" alt="LLaMA">
   </a>
@@ -16,10 +19,9 @@
 
 Official PyTorch implementation of Pruner-Zero, accepted by ICML2024
 
-**Pruner-Zero: Evolving Symbolic Pruning Metric from scratch for Large Language Models** </br>
+[**Pruner-Zero: Evolving Symbolic Pruning Metric from scratch for Large Language Models**](https://arxiv.org/abs/2406.02924v1) </br>
 *Peijie Dong\*, Lujun Li\* (* indicates equal contribution), Zhenheng Tang, Xiang Liu, Xinglin Pan, Qiang Wang, Xiaowen Chu <br>
-HKUST(GZ), HKUST, HKBU, HIT(SZ)<br>
-[Paper](https://arxiv.org/abs/2406.02924v1) 
+HKUST(GZ), HKUST, HKBU, HIT(SZ) <br>
 
 Code is still being worked on, please wait patiently...
 
