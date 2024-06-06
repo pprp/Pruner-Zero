@@ -1,4 +1,17 @@
-# Pruner-Zero 
+<p align="center">
+<img src="https://raw.githubusercontent.com/pprp/Pruner-Zero/main/.github/images/logo-of-pruner-zero.tiff" width="20%"> <br>
+</p>
+
+<div align="center">
+<h1>Pruner-Zero</h1>
+  <div align="center">
+  <a href="https://github.com/facebookresearch/llama">
+    <img src="https://img.shields.io/badge/LLMs-LLaMA-FFB000.svg?style=flat-square" alt="LLaMA">
+  </a>
+  <a href="https://github.com/facebookresearch/llama">
+    <img src="https://img.shields.io/badge/LLMs-Llama2-FAB093.svg?style=flat-square" alt="Llama-2">
+  </a>
+</div>
 
 Official PyTorch implementation of Pruner-Zero, accepted by ICML2024
 
@@ -105,7 +118,6 @@ This project is released under the MIT license. Please see the [LICENSE](LICENSE
   booktitle={Proceedings of the 41st International Conference on Machine Learning},
   year={2024},
   organization={PMLR},
-  volume={235},
   url={https://arxiv.org/abs/2406.02924},
   note={[arXiv: 2406.02924]}
 }
