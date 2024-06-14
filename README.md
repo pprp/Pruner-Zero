@@ -26,8 +26,6 @@ Official PyTorch implementation of Pruner-Zero, accepted by ICML2024
 *Peijie Dong\*, Lujun Li\* (* indicates equal contribution), Zhenheng Tang, Xiang Liu, Xinglin Pan, Qiang Wang, Xiaowen Chu <br>
 HKUST(GZ), HKUST, HKBU, HIT(SZ) <br>
 
-Code is still being worked on, please wait patiently...
-
 
 ## Contents
 - [Introduction](#introduction)
