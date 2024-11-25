@@ -464,15 +464,14 @@ def prune_pruner_zero(args, model, tokenizer, device=torch.device("cuda:0"), pru
         for name in subset:
             indexed_name = f'{name}_layer_{i}'
             print(f"pruning layer {i} name {name}")
-            # W_metric = torch.abs(subset[name].weight.data) * torch.sqrt(wrapped_layers[name].scaler_row.reshape((1,-1)))
             W = torch.abs(subset[name].weight.data)
-            # X = wrapped_layers[name].scaler_row.reshape((1,-1))
+            X = wrapped_layers[name].scaler_row.reshape((1,-1))
             G = gradients[indexed_name]
             
-            # W_metric = torch.abs(W) * torch.sqrt(X)
             W_metric = engine.forward(
                 W.to(dtype=torch.float32),
                 G.to(device=W.device, dtype=torch.float32),
+                X.to(device=W.device, dtype=torch.float32),
             )
             assert W_metric is not None
 
